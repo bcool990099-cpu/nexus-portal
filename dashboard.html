@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus Portal - Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon-sm">N</div>
+            <span>Nexus</span>
+        </div>
+        <nav>
+            <a href="dashboard.html" class="nav-item active">
+                <span class="nav-icon">◆</span> Dashboard
+            </a>
+            <a href="projects.html" class="nav-item">
+                <span class="nav-icon">◈</span> Projects
+            </a>
+            <a href="analytics.html" class="nav-item">
+                <span class="nav-icon">◉</span> Analytics
+            </a>
+            <div class="nav-label">ORGANIZATION</div>
+            <a href="#" class="nav-item"><span class="nav-icon">☰</span> Team</a>
+            <a href="#" class="nav-item"><span class="nav-icon">♢</span> Billing</a>
+            <a href="#" class="nav-item"><span class="nav-icon">⚙</span> Settings</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-tag">
+                <div class="user-avatar">JK</div>
+                <div>
+                    <div class="user-name">Jay K</div>
+                    <div class="user-role">CEO · CosmicAlpha</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p class="breadcrumb">Overview of your enterprise</p>
+            </div>
+            <div class="topbar-actions">
+                <span class="pill">🚀 12,430 credits</span>
+                <button class="btn btn-primary" onclick="window.location.href='projects.html'">+ New Project</button>
+            </div>
+        </header>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Revenue (MTD)</div>
+                <div class="stat-value">$284,390</div>
+                <div class="stat-change up">↑ 18.3% vs last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Clients</div>
+                <div class="stat-value">1,247</div>
+                <div class="stat-change up">↑ 12.1% vs last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Projects Delivered</div>
+                <div class="stat-value">3,842</div>
+                <div class="stat-change up">↑ 8.7% vs last month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg. Satisfaction</div>
+                <div class="stat-value">4.9</div>
+                <div class="stat-change up">↑ 2.4% vs last month</div>
+            </div>
+        </div>
+
+        <div class="grid-2col">
+            <div class="card chart-card">
+                <h3>Revenue Growth</h3>
+                <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+            </div>
+            <div class="card">
+                <h3>Recent Activity</h3>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-dot" style="background:#22c55e"></div>
+                        <div class="activity-text"><strong>CosmicAlpha</strong> deployed v2.4 to production</div>
+                        <div class="activity-time">2m ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot" style="background:#5865f2"></div>
+                        <div class="activity-text"><strong>AI Pipeline</strong> completed batch processing</div>
+                        <div class="activity-time">15m ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot" style="background:#f59e0b"></div>
+                        <div class="activity-text"><strong>Invoice #4821</strong> paid by Stellar Labs</div>
+                        <div class="activity-time">1h ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot" style="background:#22c55e"></div>
+                        <div class="activity-text"><strong>Weekly report</strong> generated for board review</div>
+                        <div class="activity-time">2h ago</div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-dot" style="background:#ef4444"></div>
+                        <div class="activity-text"><strong>Security scan</strong> completed — 0 vulnerabilities</div>
+                        <div class="activity-time">4h ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:24px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3>Recent Projects</h3>
+                <a href="projects.html" style="color:#5865f2;font-size:13px;text-decoration:none;">View all →</a>
+            </div>
+            <table class="data-table">
+                <tr><th>Project</th><th>Client</th><th>Status</th><th>Budget</th><th>Deadline</th></tr>
+                <tr><td>AI Trading Engine</td><td>CosmicAlpha</td><td><span class="status status-live">Live</span></td><td>$48,000</td><td>Jul 15</td></tr>
+                <tr><td>Client Portal v2</td><td>Stellar Labs</td><td><span class="status status-progress">In Progress</span></td><td>$32,000</td><td>Aug 1</td></tr>
+                <tr><td>Market Dashboard</td><td>Quantum Fin</td><td><span class="status status-live">Live</span></td><td>$24,000</td><td>Jun 30</td></tr>
+                <tr><td>AI Chat Platform</td><td>NovaCorp</td><td><span class="status status-draft">Draft</span></td><td>$56,000</td><td>Sep 15</td></tr>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script>
+window.onload = function() {
+    var ctx = document.getElementById('revenueChart');
+    if(!ctx) return;
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+            datasets: [
+                { label: 'Revenue', data: [142,178,210,245,268,284], backgroundColor: '#5865f2', borderRadius: 4 },
+                { label: 'Costs', data: [86,92,104,118,122,130], backgroundColor: '#374151', borderRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#6b7280', boxWidth: 12, padding: 16 } } },
+            scales: {
+                x: { grid: { color: '#1f2235' }, ticks: { color: '#6b7280' } },
+                y: { grid: { color: '#1f2235' }, ticks: { color: '#6b7280', callback: function(v) { return '$'+v+'k'; } } }
+            }
+        }
+    });
+};
+</script>
+</body>
+</html>
